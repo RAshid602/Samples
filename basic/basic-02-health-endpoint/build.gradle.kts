@@ -26,6 +26,8 @@ dependencies {
     implementation(libs.edc.http)
 
     implementation(libs.jakarta.rsApi)
+
+    implementation ("mysql:mysql-connector-java:8.0.28")
 }
 
 application {

@@ -17,6 +17,7 @@ package org.eclipse.edc.extension.health;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -42,5 +43,12 @@ public class HealthApiController {
     public String checkHealth() {
         monitor.info(format("%s :: Received a health request", logPrefix));
         return "{\"response\":\"I'm alive!\"}";
+    }
+
+    @POST
+    @Path("health")
+    public String addUser() {
+        monitor.info(format("%s :: Received  add request", logPrefix));
+        return "{\"response\":\"User Added!\"}";
     }
 }

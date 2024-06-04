@@ -51,14 +51,16 @@ public class HealthApiController {
     }
 
     @POST
-    @Path("users")
+    @Path("users") //Kindly use 10digit for phone(1-770-736-8031)
     public Response addUsers(String json) {
         try {
-            // Deserialize JSON to Users object
-            Users users = objectMapper.readValue(json, Users.class);
-            // Save user to database
-            healthService.saveUserToDatabase(users);
-            monitor.info(String.format("%s :: User Added", users.getName()));
+            // Deserialize JSON array to a list of Users objects
+            List<Users> usersList = objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(List.class, Users.class));
+            // Save each user to the database
+            for (Users users : usersList) {
+                healthService.saveUserToDatabase(users);
+                monitor.info(String.format("%s :: User Added", users.getName()));
+            }
             return Response.ok(json).build();
         } catch (IOException e) {
             monitor.severe("Error processing JSON", e);

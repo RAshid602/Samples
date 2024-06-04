@@ -51,7 +51,7 @@ public class HealthApiController {
     }
 
     @POST
-    @Path("users") //Kindly use 10digit for phone(1-770-736-8031)
+    @Path("users")
     public Response addUsers(String json) {
         try {
             // Deserialize JSON array to a list of Users objects
